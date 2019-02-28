@@ -13,8 +13,8 @@
 
 {% endmacro %} -->
 <!-- < Displaying reviews macro -->
-{% macro displayPitches(pitch_list) %}
-    {% for pitch in pitch_list %}
+{% macro displayPitches(pitch) %}
+    {% for pitch in pitches %}
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
         <h2> {{ pitch.user_id}} </h2>
         <p> {{ pitch.description | truncate(30) }}</p>

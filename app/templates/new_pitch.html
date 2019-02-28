@@ -9,7 +9,9 @@
         </div> -->
 
         <div class="col-md-4">
-
+            {%for pitches in pitch %}
+            <h3>{{pitch.description}}</h3>
+{%endblock%}
             {{ wtf.quick_form(pitch_form) }}
         </div>
 

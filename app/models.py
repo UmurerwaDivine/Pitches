@@ -57,7 +57,7 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     description = db.Column(db.String(255))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    comments = db.relationship('Comment',backref = 'description',lazy = "dynamic")
+    comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
     
     def __repr__(self):
         return f'User {self.description}'
@@ -87,6 +87,6 @@ class Comment(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_comment(id):
+    def get_comments(id):
         comments = Comment.query.all()
         return comments

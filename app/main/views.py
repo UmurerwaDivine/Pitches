@@ -26,7 +26,7 @@ def index():
     '''
     pitches = Pitch.get_pitches()
     # Getting popular movie
-    comments = Comment.get_comment()
+    comments = Comment.get_comments()
     title = 'Home - Welcome to The best Pitches Review Website Online'
 
     return render_template('index.html', title = title, pitches=pitches,comments= comments)
@@ -68,15 +68,16 @@ def new_comment():
 
         # save review method
         new_comment.save_comment()
-        return redirect(url_for('.index',description=description ))
+        return redirect(url_for('.index',description=description,posted=posted ))
 
  
     return render_template('new_comment.html', comment_form=form)
-@main.route('/comment')
+@main.route('/comment',methods= ['GET','POST'])
 def show_comment():
+
  comments = Comment.get_comments()
  print(comments)
- return render_template('new_comment.html', comments=comments)
+ return render_template('comments.html', comments=comments)
    
 @main.route('/user/<uname>')
 def profile(uname):

@@ -32,7 +32,7 @@ def index():
     return render_template('index.html', title = title, pitches=pitches)
 
 
-@main.route('/pitch/new',methods= ['POST'])
+@main.route('/pitch/new',methods= ['GET','POST'])
 @login_required
 def new_pitch():
     form = PitchForm()

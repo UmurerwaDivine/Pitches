@@ -57,12 +57,12 @@ class Pitch(db.Model):
 
     def __repr__(self):
         return f'User {self.name}'
-def save_pitch(self):
+    def save_pitch(self):
         db.session.add(self)
         db.session.commit()
 
-@classmethod
-def get_pitches(cls,id):
+    @classmethod
+    def get_pitches(id):
         pitches = Pitch.query.all()
         return pitches      
 class Comment(db.Model):
@@ -72,7 +72,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     description =db.Column(db.String(255))
     posted = db.Column(db.DateTime,default=datetime.utcnow)
-    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+    pitch_id = db.Column(db.Integer,db.ForeignKey("pitch.id"))
 
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 

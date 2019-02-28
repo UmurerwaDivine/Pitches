@@ -72,7 +72,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     description =db.Column(db.String(255))
     posted = db.Column(db.DateTime,default=datetime.utcnow)
-    pitch_id = db.Column(db.Integer,db.ForeignKey("pitch.id"))
+    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
 
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 

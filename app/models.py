@@ -56,6 +56,7 @@ class Pitch(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     description = db.Column(db.String(255))
+    category = db.Column(db.String(255))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
     

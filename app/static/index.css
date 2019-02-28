@@ -1,3 +1,4 @@
-body{
-    background-image: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/itCjTBE/abstract-grey-background-with-circles-video-animation-hd-1920x1080_nyqmmdpnx__F0008.png')
+*{
+    background-image: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/itCjTBE/abstract-grey-background-with-circles-video-animation-hd-1920x1080_nyqmmdpnx__F0008.png');
+    font-size: 40px;
 }

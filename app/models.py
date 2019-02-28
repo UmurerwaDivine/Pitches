@@ -75,12 +75,14 @@ class Comment(db.Model):
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
 
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    def __repr__(self):
+        return f'User {self.name}'
 
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
 
-   #  @classmethod
-   #  def get_reviews(cls,id):
-   #      reviews = Comment.query.filter_by(movie_id=id).all()
-   #      return reviews
+    @classmethod
+    def get_comment(id):
+        comments = Comment.query.all()
+        return comments

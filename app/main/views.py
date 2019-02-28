@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 
-from .forms import PitchForm,UpdateProfile
+from .forms import PitchForm,UpdateProfile,CommentForm
 from .. import db
-from ..models import User,Pitch
+from ..models import User,Pitch,Comment
 from flask_login import login_required,current_user
 from .. import db,photos
 
@@ -26,10 +26,10 @@ def index():
     '''
     pitches = Pitch.get_pitches()
     # Getting popular movie
-
+    comments = Comment.get_comment()
     title = 'Home - Welcome to The best Pitches Review Website Online'
 
-    return render_template('index.html', title = title, pitches=pitches)
+    return render_template('index.html', title = title, pitches=pitches,comments= comments)
 
 
 @main.route('/pitch/new',methods= ['GET','POST'])
@@ -54,6 +54,29 @@ def show_pitch():
  pitches = Pitch.get_pitches()
  print(pitches)
  return render_template('new_pitch.html', pitches=pitches)
+@main.route('/comment/new',methods= ['GET','POST'])
+@login_required
+def new_comment():
+    form = CommentForm()
+    if form.validate_on_submit():
+        description = form.description.data
+        posted = form.posted.data
+        
+
+        # Updated review instance
+        new_comment = Comment(description=description,posted=posted,user_id=current_user.id)
+
+        # save review method
+        new_comment.save_comment()
+        return redirect(url_for('.index',description=description ))
+
+ 
+    return render_template('new_comment.html', comment_form=form)
+@main.route('/comment')
+def show_comment():
+ comments = Comment.get_comments()
+ print(comments)
+ return render_template('new_comment.html', comments=comments)
    
 @main.route('/user/<uname>')
 def profile(uname):

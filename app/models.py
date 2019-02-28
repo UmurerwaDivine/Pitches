@@ -57,6 +57,14 @@ class Pitch(db.Model):
 
     def __repr__(self):
         return f'User {self.name}'
+def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+@classmethod
+def get_pitches(cls,id):
+        pitches = Pitch.query.all()
+        return pitches      
 class Comment(db.Model):
 
     __tablename__ = 'comments'

@@ -24,31 +24,37 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-
+    pitches = Pitch.get_pitches()
     # Getting popular movie
 
     title = 'Home - Welcome to The best Pitches Review Website Online'
 
-    return render_template('index.html', title = title)
+    return render_template('index.html', title = title, pitches=pitches)
 
 
 @main.route('/pitch/new',methods= ['POST'])
 @login_required
-def new_pitch(id):
+def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
         description = form.description.data
-       
+        
 
         # Updated review instance
         new_pitch = Pitch(description=description,user_id=current_user.id)
 
         # save review method
-        # return new_pitch.save_pitch()
-        redirect(url_for('.index',id = Pitch ))
+        new_pitch.save_pitch()
+        return redirect(url_for('.index',description=description ))
 
  
     return render_template('new_pitch.html', pitch_form=form)
+@main.route('/pitch')
+def show_pitch():
+ pitches = Pitch.get_pitches()
+ print(pitches)
+ return render_template('new_pitch.html', pitches=pitches)
+   
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()

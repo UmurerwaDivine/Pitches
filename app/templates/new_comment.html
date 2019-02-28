@@ -3,7 +3,7 @@
 {% block styles%}
         {{ super() }}
         <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
-        <link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
+    
         {% endblock %}
 {% block content %}
     <div class="container">
@@ -14,7 +14,7 @@
 
             {{ wtf.quick_form(comment_form) }}
         </div>
-
+        <a href="/comment" class="btn">view comment</a>
    
 
     {%endblock%}

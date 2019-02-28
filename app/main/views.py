@@ -32,20 +32,20 @@ def index():
     return render_template('index.html', title = title)
 
 
-@main.route('/user/<uname>',methods= ['POST'])
+@main.route('/pitch/new',methods= ['POST'])
 @login_required
 def new_pitch(id):
     form = PitchForm()
     if form.validate_on_submit():
         description = form.description.data
-        pitch = form.pitch.data
+       
 
         # Updated review instance
-        new_pitch = Pitch(pitch_id=pitch.id,description=description,user=current_user)
+        new_pitch = Pitch(description=description,user_id=current_user.id)
 
         # save review method
-        return new_pitch.save_pitch()
-        #  redirect(url_for('.pitch',id = pitch.id ))
+        # return new_pitch.save_pitch()
+        redirect(url_for('.index',id = Pitch ))
 
  
     return render_template('new_pitch.html', pitch_form=form)

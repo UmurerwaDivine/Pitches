@@ -18,6 +18,9 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
+    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
+    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
+    
     
     # Flask-Login integration
     def is_authenticated(self):
@@ -54,9 +57,10 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     description = db.Column(db.String(255))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
+    comments = db.relationship('Comment',backref = 'description',lazy = "dynamic")
+    
     def __repr__(self):
-        return f'User {self.name}'
+        return f'User {self.description}'
     def save_pitch(self):
         db.session.add(self)
         db.session.commit()
@@ -76,7 +80,7 @@ class Comment(db.Model):
 
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     def __repr__(self):
-        return f'User {self.name}'
+        return f'User {self.description}'
 
     def save_comment(self):
         db.session.add(self)

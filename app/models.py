@@ -91,3 +91,16 @@ class Comment(db.Model):
     def get_comments(id):
         comments = Comment.query.all()
         return comments
+# class VoteUp(db.Model):
+#      __tablename__ = 'voteups'
+
+#      id = db.Column(db.Integer,primary_key = True)
+#      up =db.Column(db.Integer(255))
+#      pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+
+#      def save_voteUp(self):
+#         db.session.add(self)
+#         db.session.commit()
+    #  @classmethod
+    #  def get_voteUp(cls,id):
+    #      voteup= VoteUp.query.filter_by(pitch_id=id).all()

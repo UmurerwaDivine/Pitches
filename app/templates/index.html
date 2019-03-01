@@ -17,7 +17,8 @@
         {% block styles%}
         {{ super() }}
         <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
-        
+        <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         {% endblock %}
         <!-- {% block new_pitch%}
         {% include 'new_pitch.html' %}
@@ -34,16 +35,19 @@
     <!-- Popular movie -->
     <h3>Pitches</h3>
     <ul>
-            {%for pitch in pitches%}       
+            {%for pitch in pitches%}  
+            <h4>{{pitch.category}}</h4>    
            <li>{{pitch.description}}</li> 
            <a href="/comment/new" class="btn">add comment</a>
-           <a href="/comment" class="btn">view comments</a>
+        <a href="/comment" class="btn">view comments</a>
+           <a href="vote/down" class="fa fa-thumbs-down" style="font-size:20px">0</a>
+           <a href="vote/up" class="fa fa-thumbs-up" style="font-size:20px">0</a>
    
         {%endfor%}
     </ul>
     
 
-<a href="/pitch/new" class="btn">Add pitch</a>
+<a href="/pitch/new" class="btn btn-default">Add pitch</a>
 {% endblock%}
 
 

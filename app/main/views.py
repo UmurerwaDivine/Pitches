@@ -25,11 +25,11 @@ def index():
     View root page function that returns the index page and its data
     '''
     pitches = Pitch.get_pitches()
-    # Getting popular movie
+    
     comments = Comment.get_comments()
     title = 'Home - Welcome to The best Pitches Review Website Online'
 
-    return render_template('index.html', title = title, pitches=pitches,comments= comments)
+    return render_template('index.html', title = title, pitches=pitches,comments=comments)
 
 
 @main.route('/pitch/new',methods= ['GET','POST'])
@@ -43,7 +43,7 @@ def new_pitch():
         # Updated review instance
         new_pitch = Pitch(description=description,category=category,user_id=current_user.id)
 
-        # save review method
+        # save pitch method
         new_pitch.save_pitch()
         return redirect(url_for('.index',description=description,category=category ))
 
@@ -61,7 +61,8 @@ def new_comment():
     if form.validate_on_submit():
         description = form.description.data
         posted = form.posted.data
-        
+        # comments = Comment.query.filter_by(pitch_id=id).first()
+ 
 
         # Updated review instance
         new_comment = Comment(description=description,posted=posted,user_id=current_user.id)
@@ -74,9 +75,9 @@ def new_comment():
     return render_template('new_comment.html', comment_form=form)
 @main.route('/comment',methods= ['GET','POST'])
 def show_comment():
- comments = Comment.query.filter_by(pitch_id = id).first()
- 
+
  comments = Comment.get_comments()
+ 
  print(comments)
  return render_template('comments.html', comments=comments)
    

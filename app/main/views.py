@@ -46,7 +46,7 @@ def new_pitch():
         # save pitch method
         new_pitch.save_pitch()
         return redirect(url_for('.index',description=description,category=category ))
-
+   
  
     return render_template('new_pitch.html', pitch_form=form)
 @main.route('/pitch')
